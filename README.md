@@ -9,7 +9,7 @@ Install these prerequisites to follow along with the tutorial. See free video tu
 
 ## Step 1. Clone the project
 
-`git clone https://github.com/ArchLinuxStudio/election`
+`git clone https://github.com/ikiran-dev/DVOTE.git`
 
 ## Step 2. Install dependencies
 
