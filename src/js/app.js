@@ -141,8 +141,7 @@ App = {
           $('form').hide();
          document.getElementById('voting').style.visibility='visible';
          document.getElementById('accountAddress').style.visibility='hidden';
-         var heading = document.getElementById('heading');
-         heading.innerHTML='Thanks for voting';
+         window.location.href='results.html'
         }
         loader.hide();
         content.show();

@@ -3,6 +3,8 @@ App = {
     contracts: {},
     account: '0x0',
     hasVoted: false,
+
+    
   
     init: function () {
       return App.initWeb3();
@@ -167,7 +169,10 @@ App = {
   
   $(function () {
     $(window).load(function () {
+
+
       App.init();
     });
   });
+  
   
