@@ -67,7 +67,6 @@ App = {
           console.log('event triggered', event);
           // Reload when a new vote is recorded
           App.render();
-          alert("Thanks For Voting")
         });
     });
   },
@@ -140,6 +139,10 @@ App = {
         // Do not allow a user to vote
         if (hasVoted) {
           $('form').hide();
+         document.getElementById('voting').style.visibility='visible';
+         document.getElementById('accountAddress').style.visibility='hidden';
+         var heading = document.getElementById('heading');
+         heading.innerHTML='Thanks for voting';
         }
         loader.hide();
         content.show();
