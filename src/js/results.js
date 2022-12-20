@@ -16,12 +16,7 @@ App = {
         window.location.href = "404.html";
   
       }else {
-        setTimeout(function() {
-          logout();
-        },3*60*1000);
-        function logout() {
-          window.location.href = "results.html";
-        }
+        
       if (typeof web3 !== 'undefined') {
         // If a web3 instance is already provided by Meta Mask.
         const ethEnabled = () => {
