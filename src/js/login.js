@@ -31,10 +31,22 @@ window.onload=function () {
         
       });
   }
+
+  function createCookie(value,minutes) {
+    if (minutes) {
+        var date = new Date();
+        date.setTime(date.getTime()+(minutes*60*1000));
+        var expires = "; expires="+date.toGMTString();
+    } else {
+        var expires = "";
+    }
+    document.cookie = value+expires+"; path=/";
+}
   function codeverify() {
       var code=document.getElementById('verificationCode').value;
       coderesult.confirm(code).then(function (result) {
           window.location.href='voting.html';
+          createCookie("login", 3)
           var user=result.user;
           console.log(user);
       }).catch(function (error) {
