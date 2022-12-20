@@ -152,7 +152,8 @@ App = {
           $('form').hide();
          document.getElementById('voting').style.visibility='visible';
          document.getElementById('accountAddress').style.visibility='hidden';
-         window.location.href='results.html'
+         /* window.location.href='results.html' */
+         document.getElementById("heading").innerHTML = "Thanks For Voting!";
         }
         loader.hide();
         content.show();
