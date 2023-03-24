@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Registration Form</title>
+</head>
+<body>
+  <h1>Registration Form</h1>
+  <form id="registration-form">
+    <label for="aadhaar-field">Aadhaar Number:</label>
+    <input type="text" id="aadhaar-field" name="aadhaar"><br>
+
+    <label for="number-field">Mobile Number:</label>
+    <input type="text" id="number-field" name="number"><br>
+
+    <input type="submit" value="Submit">
+  </form>
+
+  <script>
+    const form = document.getElementById('registration-form');
+    const aadhaarField = document.getElementById('aadhaar-field');
+    const numberField = document.getElementById('number-field');
+
+    form.addEventListener('submit', (event) => {
+      event.preventDefault();
+
+      // Get the values from the form fields
+      const aadhaarValue = aadhaarField.value;
+      const numberValue = numberField.value;
+
+      // Create an object with the values
+      const data = {
+        "aadhaar": aadhaarValue,
+        "number": numberValue
+      };
+
+      // Read the existing data from the file
+      fetch('registration.json')
+        .then(response => response.json())
+        .then(existingData => {
+          // Append the new data to the existing data
+          const newData = [...existingData, data];
+
+          // Convert the new data to a JSON string
+          const jsonData = JSON.stringify(newData);
+
+          // Save the new data to the file
+          const file = new Blob([jsonData], {type: 'application/json'});
+          const url = URL.createObjectURL(file);
+          const a = document.createElement('a');
+          a.style.display = 'none';
+          a.href = url;
+          a.download = 'registration.json';
+          document.body.appendChild(a);
+          a.click();
+          setTimeout(() => {
+            document.body.removeChild(a);
+            window.URL.revokeObjectURL(url);
+          }, 0);
+        })
+        .catch(error => {
+          // If the file doesn't exist yet, create it with the new data
+          const newData = [data];
+          const jsonData = JSON.stringify(newData);
+          const file = new Blob([jsonData], {type: 'application/json'});
+          const url = URL.createObjectURL(file);
+          const a = document.createElement('a');
+          a.style.display = 'none';
+          a.href = url;
+          a.download = 'registration.json';
+          document.body.appendChild(a);
+          a.click();
+          setTimeout(() => {
+            document.body.removeChild(a);
+            window.URL.revokeObjectURL(url);
+          }, 0);
+        });
+    });
+  </script>
+</body>
+</html>
