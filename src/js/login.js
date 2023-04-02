@@ -19,7 +19,7 @@ function phoneAuth() {
 
   var num = document.getElementById("number").value;
   var aadhaarValue = num;
-  fetch("registration.json")
+  fetch("json/registration.json")
     .then((response) => response.json())
     .then((data) => {
       // Find the object with the matching Aadhaar number
