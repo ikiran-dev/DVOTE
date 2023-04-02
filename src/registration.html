@@ -1,25 +1,32 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <meta charset="UTF-8">
   <title>Registration Form</title>
+  <link rel="stylesheet" href="css/admin.css">
 </head>
+
 <body>
-  <h1>Registration Form</h1>
-  <form id="registration-form">
-    <label for="aadhaar-field">Aadhaar Number:</label>
-    <input type="text" id="aadhaar-field" name="aadhaar"><br>
+  <div class="navigation">
+    <h1 id="title">Decentralised Voting System</h1>
+  </div> <br><br>
+  <h1> Register User</h1> <br><br>
+  <div class="login-container">
+    <form id="registration-form">
+      <label for="username">Aadhaar Number:</label>
+      <input type="text" id="username" name="aadhaar">
 
-    <label for="number-field">Mobile Number:</label>
-    <input type="text" id="number-field" name="number"><br>
+      <label for="number-field">Mobile Number:</label>
+      <input type="text" id="password" name="number">
 
-    <input type="submit" value="Submit">
-  </form>
-
+      <button type="submit"> Register</button>
+    </form>
+  </div>
   <script>
     const form = document.getElementById('registration-form');
-    const aadhaarField = document.getElementById('aadhaar-field');
-    const numberField = document.getElementById('number-field');
+    const aadhaarField = document.getElementById('username');
+    const numberField = document.getElementById('password');
 
     form.addEventListener('submit', (event) => {
       event.preventDefault();
@@ -35,7 +42,7 @@
       };
 
       // Read the existing data from the file
-      fetch('registration.json')
+      fetch('json/registration.json')
         .then(response => response.json())
         .then(existingData => {
           // Append the new data to the existing data
@@ -45,7 +52,7 @@
           const jsonData = JSON.stringify(newData);
 
           // Save the new data to the file
-          const file = new Blob([jsonData], {type: 'application/json'});
+          const file = new Blob([jsonData], { type: 'application/json' });
           const url = URL.createObjectURL(file);
           const a = document.createElement('a');
           a.style.display = 'none';
@@ -62,7 +69,7 @@
           // If the file doesn't exist yet, create it with the new data
           const newData = [data];
           const jsonData = JSON.stringify(newData);
-          const file = new Blob([jsonData], {type: 'application/json'});
+          const file = new Blob([jsonData], { type: 'application/json' });
           const url = URL.createObjectURL(file);
           const a = document.createElement('a');
           a.style.display = 'none';
@@ -78,4 +85,5 @@
     });
   </script>
 </body>
+
 </html>

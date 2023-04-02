@@ -67,3 +67,10 @@ button[type="submit"]:hover {
   margin: 0;
   padding: 0;
 }
+#username,
+#password {
+  width: 100%;
+  padding: 10px;
+  font-size: 20px;
+  margin-bottom: 5px;
+}
