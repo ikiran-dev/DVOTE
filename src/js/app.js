@@ -1,7 +1,7 @@
 App = {
   web3Provider: null,
   contracts: {},
-  account: '0x0',
+  account: "0x0",
   hasVoted: false,
 
   init: function () {
@@ -10,7 +10,7 @@ App = {
 
   initWeb3: function () {
     // TODO: refactor conditional
-    if (typeof web3 !== 'undefined') {
+    if (typeof web3 !== "undefined") {
       // If a web3 instance is already provided by Meta Mask.
       const ethEnabled = () => {
         if (window.ethereum) {
@@ -21,7 +21,7 @@ App = {
       };
       if (!ethEnabled()) {
         alert(
-          'Please install an Ethereum-compatible browser or extension like MetaMask to use this dApp!'
+          "Please install an Ethereum-compatible browser or extension like MetaMask to use this dApp!"
         );
       }
       web3 = window.web3;
@@ -29,7 +29,7 @@ App = {
     } else {
       // Specify default instance if no web3 instance provided
       App.web3Provider = new Web3.providers.HttpProvider(
-        'http://localhost:7545'
+        "http://localhost:7545"
       );
       web3 = new Web3(App.web3Provider);
     }
@@ -37,7 +37,7 @@ App = {
   },
 
   initContract: function () {
-    $.getJSON('Election.json', function (election) {
+    $.getJSON("Election.json", function (election) {
       // Instantiate a new truffle contract from the artifact
       App.contracts.Election = TruffleContract(election);
       // Connect provider to interact with contract
@@ -60,22 +60,21 @@ App = {
           {},
           {
             fromBlock: 0,
-            toBlock: 'latest',
+            toBlock: "latest",
           }
         )
         .watch(function (error, event) {
-          console.log('event triggered', event);
+          console.log("event triggered", event);
           // Reload when a new vote is recorded
           App.render();
-          alert("Thanks For Voting")
         });
     });
   },
 
   render: async () => {
     var electionInstance;
-    var loader = $('#loader');
-    var content = $('#content');
+    var loader = $("#loader");
+    var content = $("#content");
 
     loader.show();
     content.hide();
@@ -83,10 +82,10 @@ App = {
     // Load account data
     try {
       const accounts = await window.ethereum.request({
-        method: 'eth_requestAccounts',
+        method: "eth_requestAccounts",
       });
       App.account = accounts[0];
-      $('#accountAddress').html('Your Account: ' + App.account);
+      $("#accountAddress").html("Your Account: " + App.account);
     } catch (error) {
       if (error.code === 4001) {
         // User rejected request
@@ -107,10 +106,10 @@ App = {
         }
 
         const candidates = await Promise.all(promise);
-        var candidatesResults = $('#candidatesResults');
+        var candidatesResults = $("#candidatesResults");
         candidatesResults.empty();
 
-        var candidatesSelect = $('#candidatesSelect');
+        var candidatesSelect = $("#candidatesSelect");
         candidatesSelect.empty();
 
         for (var i = 0; i < candidatesCount; i++) {
@@ -120,18 +119,18 @@ App = {
 
           // Render candidate Result
           var candidateTemplate =
-            '<tr><th>' +
+            "<tr><th>" +
             id +
-            '</th><td>' +
+            "</th><td>" +
             name +
-            '</td><td>' +
+            "</td><td>" +
             voteCount +
-            '</td></tr>';
+            "</td></tr>";
           candidatesResults.append(candidateTemplate);
 
           // Render candidate ballot option
           var candidateOption =
-            "<option value='" + id + "' >" + name + '</ option>';
+            "<option value='" + id + "' >" + name + "</ option>";
           candidatesSelect.append(candidateOption);
         }
         return electionInstance.voters(App.account);
@@ -139,7 +138,7 @@ App = {
       .then(function (hasVoted) {
         // Do not allow a user to vote
         if (hasVoted) {
-          $('form').hide();
+          $("form").hide();
         }
         loader.hide();
         content.show();
@@ -150,15 +149,15 @@ App = {
   },
 
   castVote: function () {
-    var candidateId = $('#candidatesSelect').val();
+    var candidateId = $("#candidatesSelect").val();
     App.contracts.Election.deployed()
       .then(function (instance) {
         return instance.vote(candidateId, { from: App.account });
       })
       .then(function (result) {
         // Wait for votes to update
-        $('#content').hide();
-        $('#loader').show();
+        $("#content").hide();
+        $("#loader").show();
       })
       .catch(function (err) {
         console.error(err);
