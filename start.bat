@@ -1,7 +1,7 @@
 @echo off
 
 echo Running Truffle Migration...
-start cmd /c "npx truffle migrate --reset"
+start cmd /c "truffle migrate --reset"
 if %errorlevel% neq 0 goto error1
 
 echo Waiting for 20 seconds...

@@ -2,6 +2,7 @@
   padding: 0;
   margin: 0;
   font-family: sans-serif;
+  background-color: #f6f6f6;
 }
 #title {
   background-color: #2d4059;
@@ -19,7 +20,7 @@ body {
   max-width: 400px;
   margin: 0 auto;
   padding: 20px;
-  background-color: white;
+  background-color: #f6f6f6;
 }
 
 h1 {
@@ -38,6 +39,7 @@ label {
 
 input[type="text"],
 input[type="password"] {
+  background-color: white;
   padding: 8px;
   border-radius: 3px;
   border: 1px solid #ddd;
@@ -49,6 +51,7 @@ button[type="submit"] {
   background-color: #ffb400;
   font-weight: bold;
   cursor: pointer;
+  width: 105%;
 }
 
 button[type="submit"]:hover {
@@ -73,4 +76,21 @@ button[type="submit"]:hover {
   padding: 10px;
   font-size: 20px;
   margin-bottom: 5px;
+}
+.nav-items {
+  display: flex;
+
+  justify-content: flex-end;
+  align-items: center;
+  background-color: #2d4059;
+  text-decoration: none;
+}
+.nav-items > a {
+  font-size: large;
+  font-weight: bolder;
+  margin-right: 45px;
+  margin-top: 35px;
+  text-decoration: none;
+  background-color: #2d4059;
+  color: #f6f6f6;
 }
