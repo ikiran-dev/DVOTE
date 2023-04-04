@@ -26,42 +26,48 @@
     </div>
 
     <script>
-        const form = document.querySelector('form');
-        const resultDiv = document.querySelector('#result');
+        if (document.cookie == "admin") {
+            window.location.href = "admin-panel.html";
+        } else {
 
-        form.addEventListener('submit', async (event) => {
-            event.preventDefault();
 
-            const username = form.username.value;
-            const password = form.password.value;
+            const form = document.querySelector('form');
+            const resultDiv = document.querySelector('#result');
 
-            const response = await fetch('json/accessList.json');
-            const accessList = await response.json();
+            form.addEventListener('submit', async (event) => {
+                event.preventDefault();
 
-            if (accessList[username]) {
-                if (accessList[username] === password) {
-                    alert('Login successful.')
-                    createCookie('admin', 3)
-                    window.location.href = "admin-panel.html";
+                const username = form.username.value;
+                const password = form.password.value;
+
+                const response = await fetch('json/accessList.json');
+                const accessList = await response.json();
+
+                if (accessList[username]) {
+                    if (accessList[username] === password) {
+                        alert('Login successful.')
+                        createCookie('admin', 3)
+                        window.location.href = "admin-panel.html";
+                    } else {
+                        alert('Incorrect password.')
+                    }
                 } else {
-                    alert('Incorrect password.')
+                    alert('Username not found.')
                 }
-            } else {
-                alert('Username not found.')
-            }
-        });
+            });
 
-        function createCookie(value, minutes) {
-            if (minutes) {
-                var date = new Date();
-                date.setTime(date.getTime() + (minutes * 60 * 1000));
-                var expires = "; expires=" + date.toGMTString();
-            } else {
-                var expires = "";
+            function createCookie(value, minutes) {
+                if (minutes) {
+                    var date = new Date();
+                    date.setTime(date.getTime() + (minutes * 60 * 1000));
+                    var expires = "; expires=" + date.toGMTString();
+                } else {
+                    var expires = "";
+                }
+                document.cookie = value + expires + "; path=/";
             }
-            document.cookie = value + expires + "; path=/";
+
         }
-
     </script>
 
 </body>
