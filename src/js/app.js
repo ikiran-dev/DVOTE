@@ -10,7 +10,21 @@ App = {
 
   initWeb3: function () {
     // TODO: refactor conditional
+<<<<<<< HEAD
     if (typeof web3 !== "undefined") {
+=======
+    if (document.cookie != 'login'){
+      window.location.href = "index.html";
+
+    }else {
+      setTimeout(function() {
+        logout();
+      },3*60*1000);
+      function logout() {
+        window.location.href = "index.html";
+      }
+    if (typeof web3 !== 'undefined') {
+>>>>>>> json-file
       // If a web3 instance is already provided by Meta Mask.
       const ethEnabled = () => {
         if (window.ethereum) {
@@ -34,7 +48,7 @@ App = {
       web3 = new Web3(App.web3Provider);
     }
     return App.initContract();
-  },
+  }},
 
   initContract: function () {
     $.getJSON("Election.json", function (election) {
@@ -92,6 +106,7 @@ App = {
       }
       console.log(error);
     }
+    
 
     // Load contract data
     App.contracts.Election.deployed()
@@ -138,7 +153,15 @@ App = {
       .then(function (hasVoted) {
         // Do not allow a user to vote
         if (hasVoted) {
+<<<<<<< HEAD
           $("form").hide();
+=======
+          $('form').hide();
+         document.getElementById('voting').style.visibility='visible';
+         document.getElementById('accountAddress').style.visibility='hidden';
+         /* window.location.href='results.html' */
+         document.getElementById("heading").innerHTML = "Thanks For Voting!";
+>>>>>>> json-file
         }
         loader.hide();
         content.show();
